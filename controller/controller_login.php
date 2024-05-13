@@ -60,7 +60,7 @@ class Controller_Login extends Controller
 			$login = $this->model_login->getUser($_POST['login'], md5(md5($_POST['password'])), $hash, str_replace('.', '', $_SERVER['REMOTE_ADDR']), $ip);
 			if ($login) {
 				setcookie("id", $login, time() + 60 * 60 * 24 * 30, "/");
-				setcookie("hash", $hash, time() + 60 * 60 * 24 * 30, "/", null, null, true);
+				setcookie("hash", $hash, time() + 60 * 60 * 24 * 30, "/", null, false, true);
 				header("Location: /index.php?page=3");
 			} else {
 				$this->log->warning('Попытка неудачной авторизации');
@@ -101,7 +101,7 @@ class Controller_Login extends Controller
 						$login = $this->model_login->getUser($userInfo['id'], md5(md5($userInfo['id'] . $userInfo['first_name'] . $userInfo['sex'])), $hash, str_replace('.', '', $_SERVER['REMOTE_ADDR']), $ip, 1);   
 						if ($login) {
 							setcookie("id", $login, time() + 60 * 60 * 24 * 30, "/");
-							setcookie("hash", $hash, time() + 60 * 60 * 24 * 30, "/", null, null, true);
+							setcookie("hash", $hash, time() + 60 * 60 * 24 * 30, "/", null, false, true);
 							header("Location: /index.php?page=3");
 						}
 						//создаём нового пользователя       
@@ -112,7 +112,7 @@ class Controller_Login extends Controller
 							$login = $this->model_login->getUser($userInfo['id'], md5(md5($userInfo['id'] . $userInfo['first_name'] . $userInfo['sex'])), $hash, str_replace('.', '', $_SERVER['REMOTE_ADDR']), $ip, 1);
 							if ($login) {
 								setcookie("id", $login, time() + 60 * 60 * 24 * 30, "/");
-								setcookie("hash", $hash, time() + 60 * 60 * 24 * 30, "/", null, null, true);
+								setcookie("hash", $hash, time() + 60 * 60 * 24 * 30, "/", null, false, true);
 								header("Location: /index.php?page=3");
 							} else {
 								$this->log->warning('Попытка неудачной авторизации');
