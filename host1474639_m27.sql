@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- База данных: `host1474639_m27`
 --
-CREATE DATABASE IF NOT EXISTS `host1474639_m27` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `host1474639_m27`;
 
 -- --------------------------------------------------------
 

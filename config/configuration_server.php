@@ -1,15 +1,8 @@
 <?php
-/*
 define('DB_HOST_NAME', 'localhost');
-define('DB_NAME', 'host1474639_m27');
-define('DB_USR_NAME', 'host1474639_m27');
-define('DB_PASSWORD', '71uFbfOz');
-*/
-define('DB_HOST_NAME', '127.0.0.1');
-define('DB_NAME', 'sf_m27');
-define('DB_USR_NAME', 'root');
-define('DB_PASSWORD', 'root');
-
+define('DB_NAME', 's256658_m27');
+define('DB_USR_NAME', 's256658_m27');
+define('DB_PASSWORD', ')n%[3L915YOr');
 define('URL', '/');
 define('UPLOAD_DIR', './images');
 

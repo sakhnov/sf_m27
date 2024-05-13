@@ -10,10 +10,11 @@ class Controller_Login extends Controller
 	private $log;
 	private $VKparams = array();
 
+	public $model_login;
 	function __construct()
 	{
-		require_once 'model/model_login.php';
-		$this->model = new Model_Login();
+		$this->model_login = new Model_Login();
+
 		if (!isset($_SESSION['CSRF'])) {
 		    $this->token = hash('gost-crypto', random_int(0, 999999));
 		    $_SESSION['CSRF'] = $this->token;
@@ -56,7 +57,7 @@ class Controller_Login extends Controller
 		if ($_POST["token"] == $_SESSION["CSRF"]) {
 			$ip = '';
 			$hash = md5($this->generateCode(10));
-			$login = $this->model->getUser($_POST['login'], md5(md5($_POST['password'])), $hash, str_replace('.', '', $_SERVER['REMOTE_ADDR']), $ip);
+			$login = $this->model_login->getUser($_POST['login'], md5(md5($_POST['password'])), $hash, str_replace('.', '', $_SERVER['REMOTE_ADDR']), $ip);
 			if ($login) {
 				setcookie("id", $login, time() + 60 * 60 * 24 * 30, "/");
 				setcookie("hash", $hash, time() + 60 * 60 * 24 * 30, "/", null, null, true);
@@ -97,7 +98,7 @@ class Controller_Login extends Controller
 
 						$ip = '';
 						$hash = md5($this->generateCode(10));					
-						$login = $this->model->getUser($userInfo['id'], md5(md5($userInfo['id'] . $userInfo['first_name'] . $userInfo['sex'])), $hash, str_replace('.', '', $_SERVER['REMOTE_ADDR']), $ip, 1);   
+						$login = $this->model_login->getUser($userInfo['id'], md5(md5($userInfo['id'] . $userInfo['first_name'] . $userInfo['sex'])), $hash, str_replace('.', '', $_SERVER['REMOTE_ADDR']), $ip, 1);   
 						if ($login) {
 							setcookie("id", $login, time() + 60 * 60 * 24 * 30, "/");
 							setcookie("hash", $hash, time() + 60 * 60 * 24 * 30, "/", null, null, true);
@@ -105,10 +106,10 @@ class Controller_Login extends Controller
 						}
 						//создаём нового пользователя       
 						else {
-							$this->model->createUser($userInfo['id'], $userInfo['id'] . $userInfo['first_name'] . $userInfo['sex'], 2);
+							$this->model_login->createUser($userInfo['id'], $userInfo['id'] . $userInfo['first_name'] . $userInfo['sex'], 2);
 							$ip = '';
 							$hash = md5($this->generateCode(10));
-							$login = $this->model->getUser($userInfo['id'], md5(md5($userInfo['id'] . $userInfo['first_name'] . $userInfo['sex'])), $hash, str_replace('.', '', $_SERVER['REMOTE_ADDR']), $ip, 1);
+							$login = $this->model_login->getUser($userInfo['id'], md5(md5($userInfo['id'] . $userInfo['first_name'] . $userInfo['sex'])), $hash, str_replace('.', '', $_SERVER['REMOTE_ADDR']), $ip, 1);
 							if ($login) {
 								setcookie("id", $login, time() + 60 * 60 * 24 * 30, "/");
 								setcookie("hash", $hash, time() + 60 * 60 * 24 * 30, "/", null, null, true);

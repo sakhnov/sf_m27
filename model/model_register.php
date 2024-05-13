@@ -1,5 +1,6 @@
 <?php
-class Model_Registration extends Model
+//class Model_Registration extends Model
+class Model_Register extends Model
 {	   
     //Проверям, существует ли пользователь
     function checkUserExistance(string $User_login)
@@ -20,7 +21,7 @@ class Model_Registration extends Model
     }
    
     //Создаём пользователя
-    function createUser(string $User_login, string $UserPassword, int $RoleID=1)
+    function createUser(string $User_login, string $UserPassword, int $RoleID = 1)
     {
         // Убираем лишние пробелы и делаем двойное хэширование (используем старый метод md5)
         $password = md5(md5(trim($UserPassword)));         

@@ -38,14 +38,6 @@ class Model
 	public function getUserRole()
 	{
 		if (isset($_COOKIE['id'])) {
-			/*
-			$sql = "select role_name from roles r
-			join roles_map r2 on r.role_id = r2.role_id 
-			where r2.user_id = 
-			(
-			select id from users where id = '" . $_COOKIE['id'] . "'
-			)";
-			*/
 			$sql = "select role_id from roles_map
 			where user_id = ".$_COOKIE['id'];
 			$stmt = $this->db->query($sql);

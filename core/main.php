@@ -15,6 +15,15 @@ class Main
 			$page_name = strtolower($page_name);
 			$controller_name = "Controller_" . $page_name;
 			$controller_path = "controller/controller_" . $page_name . '.php';
+			
+			$model_name = 'model_'.$page_name;
+			$model_path = "model/model_" . $page_name . '.php';
+
+			if(file_exists($model_path))
+			{
+				include $model_path;
+			}
+
 			if (file_exists($controller_path)) {
 				include $controller_path;
 				$controller = new $controller_name;

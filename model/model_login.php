@@ -8,7 +8,7 @@ class Model_Login extends Model
         $sql = "select id, password from users where login = '$User_login' LIMIT 1";
         $stmt = $this->db->query($sql);
         $result = $stmt->FETCH(PDO::FETCH_ASSOC);
-        if (is_null($VKpass) & ($result['password']===md5(md5($_POST['password']))))
+        if (is_null($VKpass) && isset($result['password']) && ($result['password']===md5(md5($_POST['password']))))
         {
             // Записываем в БД новый хеш авторизации и IP
             $sql = "update users set token='".$Hash.$Insip."' where id='".$result['id']."';";          
@@ -43,8 +43,7 @@ class Model_Login extends Model
     {
         // Убираем лишние пробелы и делаем двойное хэширование (используем старый метод md5)
         $password = md5(md5(trim($UserPassword)));         
-        $sql = "insert into users(login, password) 
-        values ('".$User_login."', '".$password."');";   
+        $sql = "insert into users(login, password) values ('".$User_login."', '".$password."');";   
         $result =  $this->db->exec($sql); 
         if($result)
         {

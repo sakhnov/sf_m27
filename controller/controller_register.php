@@ -1,10 +1,10 @@
 <?php
 class Controller_Register extends Controller
 {
+	public $model_register;
 	function __construct()
 	{
-		require_once 'model/model_registration.php';
-		$this->model = new Model_Registration();
+		$this->model_register = new Model_Register();
 		$this->view = new View();
 	}
 
@@ -24,9 +24,9 @@ class Controller_Register extends Controller
 			$err[] = "Логин должен быть не менее 3-х и не более 30 символов";
 		}
 		if (!count($err) > 0) {
-			$userChecked = $this->model->checkUserExistance($_POST['login']);
+			$userChecked = $this->model_register->checkUserExistance($_POST['login']);
 			if ($userChecked) {
-				$createUser = $this->model->createUser($_POST['login'], $_POST['password']);
+				$createUser = $this->model_register->createUser($_POST['login'], $_POST['password']);
 				header("Location: /index.php?page=1");
 			}
 		} else {
